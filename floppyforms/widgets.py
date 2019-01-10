@@ -50,6 +50,16 @@ class Widget(forms.Widget):
         def format_value(self, value):
             return self._format_value(value)
 
+    def build_attrs(self, extra_attrs=None, **kwargs):
+         """
+         Backported from Django 1.10
+         Helper function for building an attribute dictionary.
+         """
+         attrs = dict(self.attrs, **kwargs)
+         if extra_attrs:
+             attrs.update(extra_attrs)
+         return attrs
+
 
 class Input(Widget):
     template_name = 'floppyforms/input.html'
